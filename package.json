@@ -1,0 +1,34 @@
+{
+  "name": "dotenv-webcore",
+  "version": "1.0.0",
+  "description": "Dotenv with expand and type convertion",
+  "main": "lib/index.esm.min.js",
+  "exports": {
+    ".": {
+      "require": "./lib/index.cjs.min.js",
+      "default": "./lib/index.esm.min.js"
+    }
+  },
+  "scripts": {
+    "build": "rollup --config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webcoreinteractive/dotenv-webcore"
+  },
+  "author": "Webcore Interactive",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
