@@ -34,7 +34,14 @@ const load = (cfg = {}, funcs = {}) => {
 	const loadedDefault = expand(config({ path: defaultCfg }))
 	const loadedEnv = expand(config({ path: environmentCfg, ...cfg }))
 
-	return { ...loadedDefault.parsed, ...loadedEnv?.parsed }
+	const combined = { ...loadedDefault.parsed, ...loadedEnv?.parsed }
+
+	let ret = {}
+
+	for(const key in combined)
+		ret[key] = convert(combined[key])
+
+	return ret
 
 }
 
