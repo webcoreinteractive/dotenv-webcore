@@ -31,8 +31,10 @@ const convert = (str, funcs) => {
 
 const load = (cfg = {}, funcs = {}) => {
 	
-	expand(dotenv.config({ path: defaultCfg }))
-	expand(dotenv.config({ path: environmentCfg, ...cfg }))
+	const loadedDefault = expand(config({ path: defaultCfg }))
+	const loadedEnv = expand(config({ path: environmentCfg, ...cfg }))
+
+	return { ...loadedDefault.parsed, ...loadedEnv?.parsed }
 
 }
 
