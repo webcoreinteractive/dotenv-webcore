@@ -18,6 +18,8 @@
   },
   "author": "Webcore Interactive",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "webpack": "^5.83.1",
