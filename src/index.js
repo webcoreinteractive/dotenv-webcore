@@ -45,8 +45,9 @@ const load = (cfg = {}, funcs = {}) => {
 
 }
 
-module.exports = {
-	config, decrypt, parse,
-	expand,
-	load, convert,
-}
+exports.config = config
+exports.decrypt = decrypt
+exports.parse = parse
+exports.expand = expand
+exports.load = load
+exports.convert = convert
