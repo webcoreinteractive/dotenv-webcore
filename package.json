@@ -2,7 +2,8 @@
   "name": "dotenv-webcore",
   "version": "1.0.0",
   "description": "Dotenv with expand and type convertion",
-  "main": "lib/index.esm.min.js",
+  "module": "lib/index.esm.min.js",
+  "main": "lib/index.cjs.min.js",
   "exports": {
     ".": {
       "require": "./lib/index.cjs.min.js",
@@ -21,6 +22,7 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-strip": "^3.0.4",
     "rollup-plugin-terser": "^7.0.2",
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1"
@@ -29,8 +31,10 @@
     "node": ">=16"
   },
   "dependencies": {
+    "diskusage-ng": "^1.0.4",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "ws": "^8.15.0"
   }
 }
