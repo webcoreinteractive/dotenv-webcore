@@ -5,10 +5,8 @@
   "module": "lib/index.esm.min.js",
   "main": "lib/index.cjs.min.js",
   "exports": {
-    ".": {
-      "require": "./lib/index.cjs.min.js",
-      "default": "./lib/index.esm.min.js"
-    }
+    "require": "./lib/index.cjs.min.js",
+    "import": "./lib/index.esm.min.js"
   },
   "scripts": {
     "build": "rollup --config"
