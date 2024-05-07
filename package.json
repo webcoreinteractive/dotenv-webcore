@@ -2,7 +2,7 @@
   "name": "dotenv-webcore",
   "version": "1.0.0",
   "description": "Dotenv with expand and type convertion",
-  "module": "lib/index.esm.min.js",
+  "module": "lib/index.cjs.min.js",
   "main": "lib/index.cjs.min.js",
   "exports": {
     ".": {
