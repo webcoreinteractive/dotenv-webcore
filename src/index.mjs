@@ -50,7 +50,7 @@ const convertall = (env) => {
 	let ret = {}
 
 	for(const key in env)
-		ret[key] = convert(combined[key])
+		ret[key] = convert(env[key])
 
 	return ret
 
