@@ -34,7 +34,7 @@ const convert = (str, funcs) => {
 		case 'date':
 			return new Date(content)
 		default:
-			return funcs[type](content)
+			return funcs && funcs[type] ? funcs[type](content) : str
 	}
 
 }
