@@ -8,26 +8,33 @@ import pkg from './package.json'
 const minifiedOutputs = [
 	{
 		file: pkg.exports['.'].default,
-		format: 'esm',
+		format: 'es',
+		sourcemap: false,
 	},
 	{
 		file: pkg.exports['.'].require,
 		format: 'cjs',
+		sourcemap: false,
 	},
 ]
 
 const commonPlugins = [
-	commonjs(),
+	commonjs({
+		extensions: ['.js', '.mjs', '.o.mjs'],
+		requireReturnsDefault: 'auto',
+	}),
 	json(),
 ]
 
 export default [
 	{
-		input: './src/index.js',
+		input: './src/index.mjs',
 		output: [...minifiedOutputs],
 		plugins: [
 			...commonPlugins,
-			resolve(),
+			resolve({
+				preferBuiltins: true,
+			}),
 			terser(),
 		],
 		external: [/^@babel\/runtime\//],

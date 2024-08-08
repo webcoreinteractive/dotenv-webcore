@@ -1,11 +1,12 @@
-const path = require('path')
-const { config, decrypt, parse } = require('dotenv')
-const { expand } = require('dotenv-expand')
+import path from 'node:path'
+import { config, decrypt, parse } from 'dotenv'
+import { expand } from 'dotenv-expand'
 
 const convertRegExp = /(?<content>.*)::(?<type>\w*)$/
 
+
 const defaultCfg = path.resolve(process.cwd(), '.env.default')
-const environmentCfg = path.resolve(process.cwd(), `.env.${process.env.CONFIG_ENV || 'development'}`)
+const environmentCfg = path.resolve(process.cwd(), `.env.${process.env.BASE_CONFIG_ENV || process.env.CONFIG_ENV || 'development'}`)
 
 const convert = (str, funcs) => {
 	
@@ -19,8 +20,18 @@ const convert = (str, funcs) => {
 		case 'int':
 		case 'float':
 			return +content
+		case 'bool':
+			let parsedBool = undefined
+			try{
+				parsedBool = JSON.parse(content)
+			}catch(e){}
+			return !!parsedBool
 		case 'json':
-			return JSON.parse(content)
+			let parsed = undefined
+			try{
+				parsed = JSON.parse(content)
+			}catch(e){}
+			return parsed
 		case 'date':
 			return new Date(content)
 		default:
@@ -45,9 +56,5 @@ const load = (cfg = {}, funcs = {}) => {
 
 }
 
-exports.config = config
-exports.decrypt = decrypt
-exports.parse = parse
-exports.expand = expand
-exports.load = load
-exports.convert = convert
+export default { config, decrypt, parse, expand, load, convert }
+export { config, decrypt, parse, expand, load, convert }
