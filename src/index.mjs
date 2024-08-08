@@ -4,7 +4,6 @@ import { expand } from 'dotenv-expand'
 
 const convertRegExp = /(?<content>.*)::(?<type>\w*)$/
 
-
 const defaultCfg = path.resolve(process.cwd(), '.env.default')
 const environmentCfg = path.resolve(process.cwd(), `.env.${process.env.BASE_CONFIG_ENV || process.env.CONFIG_ENV || 'development'}`)
 
@@ -40,6 +39,23 @@ const convert = (str, funcs) => {
 
 }
 
+const convertall = (env) => {
+
+	if(!env && ("object" == typeof process) && process?.env)
+		env = process.env
+
+	if(typeof env != "object")
+		return {}
+
+	let ret = {}
+
+	for(const key in env)
+		ret[key] = convert(combined[key])
+
+	return ret
+
+}
+
 const load = (cfg = {}, funcs = {}) => {
 	
 	const loadedDefault = expand(config({ path: defaultCfg }))
@@ -47,14 +63,11 @@ const load = (cfg = {}, funcs = {}) => {
 
 	const combined = { ...loadedDefault.parsed, ...loadedEnv?.parsed }
 
-	let ret = {}
-
-	for(const key in combined)
-		ret[key] = convert(combined[key])
+	let ret = convertall(combined)
 
 	return ret
 
 }
 
-export default { config, decrypt, parse, expand, load, convert }
+export default { config, decrypt, parse, expand, load, convert, convertall }
 export { config, decrypt, parse, expand, load, convert }
