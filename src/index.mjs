@@ -70,4 +70,4 @@ const load = (cfg = {}, funcs = {}) => {
 }
 
 export default { config, decrypt, parse, expand, load, convert, convertall }
-export { config, decrypt, parse, expand, load, convert }
+export { config, decrypt, parse, expand, load, convert, convertall }
