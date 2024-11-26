@@ -58,10 +58,12 @@ const convertall = (env) => {
 
 const load = (cfg = {}, funcs = {}) => {
 	
+	const systemEnv = "object" == typeof process && process?.env ? { ...process.env } : {}
+
 	const loadedDefault = expand(config({ path: defaultCfg }))
 	const loadedEnv = expand(config({ path: environmentCfg, ...cfg }))
 
-	const combined = { ...loadedDefault.parsed, ...loadedEnv?.parsed }
+	const combined = { ...systemEnv, ...loadedDefault.parsed, ...loadedEnv?.parsed }
 
 	let ret = convertall(combined)
 
