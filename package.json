@@ -1,5 +1,5 @@
 {
-  "name": "dotenv-webcore",
+  "name": "@webcoreinteractive/dotenv-webcore",
   "version": "1.0.0",
   "description": "Dotenv with expand and type convertion",
   "module": "lib/index.cjs.min.js",
