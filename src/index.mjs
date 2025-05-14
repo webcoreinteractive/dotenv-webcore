@@ -60,15 +60,10 @@ const load = (cfg = {}, funcs = {}) => {
 	
 	const systemEnv = "object" == typeof process && process?.env ? { ...process.env } : {}
 
-	console.log('system envs?', "object" == typeof process && !!process?.env)
-	console.log('has openai?', !!process?.env?.OPENAI_API_KEY)
-
 	const loadedDefault = expand(config({ path: defaultCfg }))
 	const loadedEnv = expand(config({ path: environmentCfg, ...cfg }))
 
 	const combined = { ...systemEnv, ...loadedDefault.parsed, ...loadedEnv?.parsed }
-
-	console.log('combined has openai?', !!combined.OPENAI_API_KEY)
 
 	let ret = convertall(combined)
 
