@@ -57,6 +57,9 @@ const load = (cfg = {}, funcs = {}, cwd = null) => {
 	
 	const systemEnv = "object" == typeof process && process?.env ? { ...process.env } : {}
 
+	if(typeof SOURCE_PATH != 'undefined')
+		cwd = SOURCE_PATH
+
 	if(!cwd)
 		cwd = process.cwd()
 
