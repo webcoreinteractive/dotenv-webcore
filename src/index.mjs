@@ -4,10 +4,7 @@ import { expand } from 'dotenv-expand'
 
 const convertRegExp = /(?<content>.*)::(?<type>\w*)$/
 
-const defaultCfg = path.resolve(process.cwd(), '.env.default')
-const environmentCfg = path.resolve(process.cwd(), `.env.${process.env.BASE_CONFIG_ENV || process.env.CONFIG_ENV || 'development'}`)
-
-const convert = (str, funcs) => {
+const convert = (str, funcs = {}) => {
 	
 	if(!convertRegExp.test(str))
 		return str
@@ -39,7 +36,7 @@ const convert = (str, funcs) => {
 
 }
 
-const convertall = (env) => {
+const convertall = (env, funcs = {}) => {
 
 	if(!env && ("object" == typeof process) && process?.env)
 		env = process.env
@@ -50,22 +47,28 @@ const convertall = (env) => {
 	let ret = {}
 
 	for(const key in env)
-		ret[key] = convert(env[key])
+		ret[key] = convert(env[key], funcs)
 
 	return ret
 
 }
 
-const load = (cfg = {}, funcs = {}) => {
+const load = (cfg = {}, funcs = {}, cwd = null) => {
 	
 	const systemEnv = "object" == typeof process && process?.env ? { ...process.env } : {}
+
+	if(!cwd)
+		cwd = process.cwd()
+
+	const defaultCfg = path.resolve(cwd, '.env.default')
+	const environmentCfg = path.resolve(cwd, `.env.${process.env.BASE_CONFIG_ENV || process.env.CONFIG_ENV || 'development'}`)
 
 	const loadedDefault = expand(config({ path: defaultCfg }))
 	const loadedEnv = expand(config({ path: environmentCfg, ...cfg }))
 
 	const combined = { ...systemEnv, ...loadedDefault.parsed, ...loadedEnv?.parsed }
 
-	let ret = convertall(combined)
+	let ret = convertall(combined, funcs)
 
 	return ret
 
