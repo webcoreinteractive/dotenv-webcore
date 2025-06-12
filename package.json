@@ -1,6 +1,6 @@
 {
   "name": "@webcoreinteractive/dotenv-webcore",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Dotenv with expand and type convertion",
   "module": "lib/index.cjs.min.js",
   "main": "lib/index.cjs.min.js",
@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "diskusage-ng": "^1.0.4",
-    "dotenv": "^16.0.3",
-    "dotenv-expand": "^10.0.0",
+    "dotenv": "^16.5.0",
+    "dotenv-expand": "^12.0.2",
     "path": "^0.12.7",
     "ws": "^8.15.0"
   }
